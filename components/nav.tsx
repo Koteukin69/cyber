@@ -15,9 +15,6 @@ export default function Nav() {
     <NavigationMenuList>
       <NavigationMenuItem className={"flex flex-row gap-2"}>
         <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-          <Link href="/">Главная</Link>
-        </NavigationMenuLink>
-        <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
           <Link href="/book">Бронирование</Link>
         </NavigationMenuLink>
         <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
