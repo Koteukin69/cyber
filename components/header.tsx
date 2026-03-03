@@ -9,9 +9,9 @@ export default async function Header() {
   const role = headersList.get('x-user-role');
 
   return (<header className={"absolute w-full px-5 sm:px-10 py-3 flex flex-row gap-5 bg-background"}>
-    <Logo/>
-    <Nav/>
-    <div className="mx-auto"/>
+    <Logo />
+    <Nav />
+    <div className="mx-auto" />
     <Login authorized={role !== null} />
   </header>);
 }

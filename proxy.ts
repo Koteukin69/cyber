@@ -9,7 +9,7 @@ export async function proxy(request: NextRequest) {
   const accessLevel = getAccessLevel(payload?.role);
 
   if (payload && pathname.startsWith("/login")) {
-    return NextResponse.redirect(new URL('/', request.url));
+    return NextResponse.redirect(new URL('/profile', request.url));
   }
 
   const secured = [

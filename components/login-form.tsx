@@ -81,7 +81,6 @@ export function LoginForm() {
           return;
         }
 
-        router.push("/profile");
         router.refresh();
       } catch {
         setError({ message: "Ошибка соединения с сервером" });
