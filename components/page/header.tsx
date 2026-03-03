@@ -1,6 +1,6 @@
-import Nav from './nav'
+import Nav from './header/nav'
 import Image from "next/image";
-import Login from "@/components/login-button"
+import Login from "@/components/page/header/login-button"
 import { headers } from "next/headers";
 import Link from "next/link";
 
@@ -18,7 +18,7 @@ export default async function Header() {
 
 function Logo() {
   return (
-    <Link href={"/"}>
+    <Link href={"/public"}>
       <Image src={"logo.svg"} width={100} height={100} alt={"Logo"} className={"w-10 aspect-square"} />
     </Link>
   );
