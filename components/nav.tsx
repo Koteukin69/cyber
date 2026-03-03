@@ -10,19 +10,23 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 
+const links: {name:string, href:string}[] = [
+  {name:"Бронирование", href:"/book"},
+  {name:"Турниры", href:"/tournaments"},
+  {name:"Достижения", href:"/advancements"},
+  {name:"Команды", href:"/team"},
+  {name:"События", href:"/events"},
+  {name:"API", href:"/public_api"},
+]
 export default function Nav() {
   return (<NavigationMenu>
     <NavigationMenuList>
       <NavigationMenuItem className={"flex flex-row gap-2"}>
-        <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-          <Link href="/book">Бронирование</Link>
-        </NavigationMenuLink>
-        <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-          <Link href="/news">Новости</Link>
-        </NavigationMenuLink>
-        <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-          <Link href="/public_api">API</Link>
-        </NavigationMenuLink>
+        {links.map((link, i) => (
+          <NavigationMenuLink key={i} asChild className={navigationMenuTriggerStyle()}>
+            <Link href={link.href}>{link.name}</Link>
+          </NavigationMenuLink>
+        ))}
       </NavigationMenuItem>
     </NavigationMenuList>
   </NavigationMenu>);

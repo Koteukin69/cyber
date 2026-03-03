@@ -12,8 +12,14 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL('/profile', request.url));
   }
 
+  if (payload && pathname.startsWith("/logout")) {
+    const response = NextResponse.redirect(new URL('/', request.url));
+    response.cookies.delete('auth-token');
+    return response;
+  }
+
   const secured = [
-    ["/profile"],
+    ["/profile", "/advancements", "/team"],
     ["/admin"],
   ]
 

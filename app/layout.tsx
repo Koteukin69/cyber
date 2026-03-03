@@ -5,12 +5,13 @@ import { Inter } from 'next/font/google'
 import {ThemeProvider} from "next-themes";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-const inter = Inter({ subsets: ['latin'] })
+import Config from "@/lib/config";
+const inter = Inter({ subsets: ['latin', 'cyrillic'] })
 
 
 export const metadata: Metadata = {
-  title: "Киберарена IT.Moscow",
-  description: "Киберарена IT.Moscow",
+  title: Config.name,
+  description: Config.description,
 };
 
 export default function RootLayout({

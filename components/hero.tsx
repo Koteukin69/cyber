@@ -1,4 +1,5 @@
 import Orb from "@/components/orb";
+import Config from "@/lib/config";
 
 export default function Hero() {
 
@@ -7,9 +8,9 @@ export default function Hero() {
     <div className="absolute inset-0 -z-1 bg-linear-to-b from-primary/10 via-transparent to-transparent"/>
     <div className="absolute inset-0 -z-2 bg-background/50"/>
     <div className="absolute inset-0 -z-3 overflow-hidden">
-      <Orb scaleMode={"max"}/>
+      <Orb scaleMode={"max"} speed={1.5}/>
     </div>
-    <div className={"text-3xl sm:text-5xl font-bold"}>Кибер Арена</div>
-    <div className={"text-md sm:text-lg  max-w-lg text-center"}>Сервис, который помогает студентам бронировать зоны, видеть занятость и развивать активность вокруг арены</div>
+    <div className={"text-3xl sm:text-5xl font-bold"}>{Config.name}</div>
+    <div className={"text-md sm:text-lg  max-w-lg text-center"}>{Config.briefDescription}</div>
   </div>);
 }
