@@ -18,10 +18,10 @@ const links: {name:string, href:string}[] = [
   {name:"События", href:"/events"},
   {name:"API", href:"/public_api"},
 ]
-export default function Nav() {
-  return (<NavigationMenu>
+export default function Nav({isColumn}: {isColumn?: boolean}) {
+  return (<NavigationMenu className={isColumn ? "items-start" : ""}>
     <NavigationMenuList>
-      <NavigationMenuItem className={"flex flex-row gap-2"}>
+      <NavigationMenuItem className={`flex gap-2 ${isColumn ? "flex-col" : ""}`}>
         {links.map((link, i) => (
           <NavigationMenuLink key={i} asChild className={navigationMenuTriggerStyle()}>
             <Link href={link.href}>{link.name}</Link>
