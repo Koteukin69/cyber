@@ -107,7 +107,7 @@ export default function ProfileForm({groups}: {groups: string[]}) {
         </Field>
         <Field orientation={"horizontal"} className={"justify-center"}>
           <Button variant={"link"} className={"text-destructive"} asChild>
-            <Link href={"/logout"}>Выйти</Link>
+            <Link href={"/logout"} prefetch={false}>Выйти</Link>
           </Button>
         </Field>
         <FieldError>{error}</FieldError>
