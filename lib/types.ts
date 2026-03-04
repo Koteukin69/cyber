@@ -1,4 +1,5 @@
 import { ObjectId } from 'mongodb'
+import {groups} from './groups'
 
 export interface EmailCode {
   _id: ObjectId,
@@ -9,11 +10,14 @@ export interface EmailCode {
 }
 
 export type Role = "admin" | "user";
+export type Group = typeof groups[number];
 
 export interface User {
   _id: ObjectId,
   email: string,
-  username: string,
+  fio?: string,
+  group?: Group,
+  steam?: string,
   role: Role
 }
 
