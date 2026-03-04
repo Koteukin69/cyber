@@ -25,6 +25,7 @@ import {Button} from "@/components/ui/button";
 import {useState, useEffect} from "react";
 import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert";
 import {AlertTriangleIcon} from "lucide-react";
+import Link from "next/link";
 
 export default function ProfileForm({groups}: {groups: string[]}) {
   const [fio, setFio] = useState("");
@@ -102,6 +103,11 @@ export default function ProfileForm({groups}: {groups: string[]}) {
           </Button>
           <Button variant="outline" type="button" onClick={refresh} disabled={!isDirty}>
             Отменить
+          </Button>
+        </Field>
+        <Field orientation={"horizontal"} className={"justify-center"}>
+          <Button variant={"link"} className={"text-destructive"} asChild>
+            <Link href={"/logout"}>Выйти</Link>
           </Button>
         </Field>
         <FieldError>{error}</FieldError>
