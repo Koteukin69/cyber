@@ -1,4 +1,5 @@
 import { template, TemplateExecutor } from 'lodash';
+import { collections } from '@/lib/db/collections';
 
 interface IConfig {
   name: string,
@@ -8,16 +9,14 @@ interface IConfig {
   emailHtml: TemplateExecutor,
 };
 
-const Config:IConfig = {
+export const DEFAULT_CONFIG_STRINGS = {
   name: "Кибер Арена",
   briefDescription: "Сервис, который помогает студентам бронировать зоны, видеть занятость и развивать активность вокруг арены",
-  description: `
-Сервис, который помогает студентам бронировать зоны, видеть занятость и развивать активность вокруг арены.
-`,
-  emailSubject: template("Вход в <%= name %>"),
-  emailHtml: template(`
+  description: "Сервис, который помогает студентам бронировать зоны, видеть занятость и развивать активность вокруг арены.",
+  emailSubject: "Вход в <%= name %>",
+  emailHtml: `
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
            max-width: 480px; margin: 0 auto; padding: 40px 20px; }
     .code { font-size: 32px; font-weight: bold; letter-spacing: 8px; text-align: center;
             padding: 20px; background: #f4f4f5; border-radius: 8px; margin: 24px 0; }
@@ -32,8 +31,32 @@ const Config:IConfig = {
       Если вы не запрашивали этот код, просто проигнорируйте это письмо.
     </p>
   </body>
-  `),
+  `,
 };
 
-export default Config;
+const Config: IConfig = {
+  name: DEFAULT_CONFIG_STRINGS.name,
+  briefDescription: DEFAULT_CONFIG_STRINGS.briefDescription,
+  description: DEFAULT_CONFIG_STRINGS.description,
+  emailSubject: template(DEFAULT_CONFIG_STRINGS.emailSubject),
+  emailHtml: template(DEFAULT_CONFIG_STRINGS.emailHtml),
+};
 
+export async function getConfig(): Promise<IConfig> {
+  try {
+    const col = await collections.siteConfig();
+    const doc = await col.findOne({});
+    if (!doc) return Config;
+    return {
+      name: doc.name,
+      briefDescription: doc.briefDescription,
+      description: doc.description,
+      emailSubject: template(doc.emailSubject),
+      emailHtml: template(doc.emailHtml),
+    };
+  } catch {
+    return Config;
+  }
+}
+
+export default Config;

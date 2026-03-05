@@ -9,6 +9,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
+import src from "zod";
 
 const links: {name:string, href:string}[] = [
   {name:"Бронирование", href:"/book"},
@@ -18,11 +19,15 @@ const links: {name:string, href:string}[] = [
   {name:"События", href:"/events"},
   {name:"API", href:"/public_api"},
 ]
-export default function Nav({isColumn}: {isColumn?: boolean}) {
+
+const adminLinks:{name: string, href:string} = {name: "Admin", href: "/admin"}
+
+export default function Nav({isColumn, isAdmin}: {isColumn?: boolean, isAdmin: boolean}) {
+  const newLinks = isAdmin ? [...links, adminLinks] : links;
   return (<NavigationMenu className={isColumn ? "items-start" : ""}>
     <NavigationMenuList>
       <NavigationMenuItem className={`flex gap-2 ${isColumn ? "flex-col" : ""}`}>
-        {links.map((link, i) => (
+        {newLinks.map((link, i) => (
           <NavigationMenuLink key={i} asChild className={navigationMenuTriggerStyle()}>
             <Link href={link.href}>{link.name}</Link>
           </NavigationMenuLink>

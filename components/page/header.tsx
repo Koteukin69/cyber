@@ -25,7 +25,7 @@ export default async function Header() {
   return (<header className={"absolute w-full px-5 sm:px-10 py-3 flex items-center gap-5 bg-background"}>
     <Logo />
     <div className={"hidden lg:flex w-full"}>
-      <Nav />
+      <Nav isAdmin={role === "admin"} />
       <div className="mx-auto" />
       <Login authorized={role !== null} />
     </div>
@@ -37,7 +37,7 @@ export default async function Header() {
         <SheetContent className={"flex flex-col py-10 px-5"}>
           <Link href={"/"}><SheetTitle>Кибер Арена</SheetTitle></Link>
           <Separator/>
-          <Nav isColumn/>
+          <Nav isAdmin={role === "admin"} isColumn/>
           <div className="my-auto" />
           <Login authorized={role !== null} />
         </SheetContent>

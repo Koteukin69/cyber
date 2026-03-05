@@ -1,6 +1,6 @@
 import { Collection, Document } from 'mongodb';
 import clientPromise from './mongodb';
-import type { EmailCode, User } from '@/lib/types';
+import type { EmailCode, User, SiteConfig } from '@/lib/types';
 
 const DB_NAME = process.env.MONGODB_NAME || 'db';
 
@@ -17,4 +17,5 @@ export async function getCollection<T extends Document>(name: string): Promise<C
 export const collections = {
   emailCodes: () => { return getCollection<EmailCode>("emailCodes") },
   users: () => { return getCollection<User>("users") },
+  siteConfig: () => { return getCollection<SiteConfig>("siteConfig") },
 }

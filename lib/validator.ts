@@ -19,5 +19,12 @@ export const schemas = {
       return groups.includes(group as Group);
     }, { message: "Невалидная группа" }),
     steam: z.string().trim().regex(/https?:\/\/steamcommunity\.com\/(id|profiles)\/([a-zA-Z0-9_-]+)\/?/, {message: "Должна быть ссылка на профиль steam"}).or(z.literal(""))
+  }),
+  siteConfig: z.object({
+    name: z.string().trim().min(1, "Название обязательно"),
+    briefDescription: z.string().trim().min(1, "Краткое описание обязательно"),
+    description: z.string().trim().min(1, "Описание обязательно"),
+    emailSubject: z.string().trim().min(1, "Тема письма обязательна"),
+    emailHtml: z.string().trim().min(1, "HTML письма обязателен"),
   })
 }

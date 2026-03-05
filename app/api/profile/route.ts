@@ -7,6 +7,7 @@ import {ObjectId} from "mongodb";
 export async function GET(req: NextRequest) {
   const userId = req.headers.get('x-user-id');
   if (!userId) return NextResponse.json({error: "Не авторизован"}, {status: 401});
+  if (!ObjectId.isValid(userId)) return NextResponse.json({ error: "Некорректный ID" }, { status: 422 })
 
   const usersCollection = await collections.users();
   const user = await usersCollection.findOne({_id: new ObjectId(userId)}) as User | null;

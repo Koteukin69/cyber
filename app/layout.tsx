@@ -5,14 +5,17 @@ import { Inter } from 'next/font/google'
 import {ThemeProvider} from "next-themes";
 import Header from "@/components/page/header";
 import Footer from "@/components/page/footer";
-import Config from "@/lib/config";
+import { getConfig } from "@/lib/config";
 const inter = Inter({ subsets: ['latin', 'cyrillic'] })
 
 
-export const metadata: Metadata = {
-  title: Config.name,
-  description: Config.description,
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const config = await getConfig();
+  return {
+    title: config.name,
+    description: config.description,
+  };
+}
 
 export default function RootLayout({
   children,
@@ -31,7 +34,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          <main>
+          <main className={"min-h-dvh"}>
             {children}
           </main>
           <Footer />

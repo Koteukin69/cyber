@@ -24,10 +24,10 @@ import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import {useState, useEffect} from "react";
 import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert";
-import {AlertTriangleIcon} from "lucide-react";
+import {AlertTriangleIcon, Link as LinkIcon} from "lucide-react";
 import Link from "next/link";
 
-export default function ProfileForm({groups}: {groups: string[]}) {
+export default function ProfileForm({groups, userSlug}: {groups: string[], userSlug: string}) {
   const [fio, setFio] = useState("");
   const [group, setGroup] = useState("");
   const [steam, setSteam] = useState("");
@@ -68,7 +68,12 @@ export default function ProfileForm({groups}: {groups: string[]}) {
   return (<>
     <Warning show={showWarning}/>
     <FieldSet className={"max-w-sm w-full"}>
-      <FieldLegend>Профиль</FieldLegend>
+      <FieldLegend className={"w-full flex justify-between items-center"}>
+        Профиль
+        <Button variant={"ghost"} size={"icon-sm"} asChild>
+          <Link href={`/profile/${userSlug}`}><LinkIcon /></Link>
+        </Button>
+      </FieldLegend>
       <FieldSeparator/>
       <FieldGroup>
         <Field>

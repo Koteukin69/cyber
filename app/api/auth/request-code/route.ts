@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { generateCode } from '@/lib/utils';
 import { send } from '@/lib/email/client'
-import Config from '@/lib/config';
+import { getConfig } from '@/lib/config';
 import { collections } from '@/lib/db/collections'
 import { schemas } from '@/lib/validator';
 
@@ -35,7 +35,8 @@ export async function POST(req: NextRequest) {
       { upsert: true }
     );
 
-    const sent = await send(normalizedEmail, Config.emailSubject({"name": Config.name}), Config.emailHtml({"code": code, "name": Config.name}));
+    const config = await getConfig();
+    const sent = await send(normalizedEmail, config.emailSubject({"name": config.name}), config.emailHtml({"code": code, "name": config.name}));
 
     if (!sent) {
       return NextResponse.json(

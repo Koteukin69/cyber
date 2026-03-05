@@ -26,3 +26,11 @@ export interface JWTPayload {
   email: string;
   role: Role;
 }
+
+export interface SiteConfig {
+  name: string;
+  briefDescription: string;
+  description: string;
+  emailSubject: string;
+  emailHtml: string;
+}

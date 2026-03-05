@@ -22,7 +22,7 @@ export async function proxy(request: NextRequest) {
 
   const secured = [
     ["/profile", "/advancements", "/team"],
-    ["/admin"],
+    ["/admin", "/api/admin"],
   ]
 
   for (let i = 0; i < secured.length; i++) {
