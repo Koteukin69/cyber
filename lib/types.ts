@@ -33,6 +33,14 @@ export interface SiteConfig {
   description: string;
   emailSubject: string;
   emailHtml: string;
+  timezone: number;
+}
+
+export interface Event {
+  _id: ObjectId;
+  title: string;
+  description?: string;
+  date: Date;
 }
 
 export interface TeamMember {

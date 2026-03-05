@@ -1,5 +1,6 @@
 import { template, TemplateExecutor } from 'lodash';
 import { collections } from '@/lib/db/collections';
+import { DEFAULT_TIMEZONE } from '@/lib/timezones';
 
 interface IConfig {
   name: string,
@@ -7,6 +8,7 @@ interface IConfig {
   description: string,
   emailSubject: TemplateExecutor,
   emailHtml: TemplateExecutor,
+  timezone: number,
 };
 
 export const DEFAULT_CONFIG_STRINGS = {
@@ -40,6 +42,7 @@ const Config: IConfig = {
   description: DEFAULT_CONFIG_STRINGS.description,
   emailSubject: template(DEFAULT_CONFIG_STRINGS.emailSubject),
   emailHtml: template(DEFAULT_CONFIG_STRINGS.emailHtml),
+  timezone: DEFAULT_TIMEZONE,
 };
 
 export async function getConfig(): Promise<IConfig> {
@@ -53,6 +56,7 @@ export async function getConfig(): Promise<IConfig> {
       description: doc.description,
       emailSubject: template(doc.emailSubject),
       emailHtml: template(doc.emailHtml),
+      timezone: doc.timezone ?? DEFAULT_TIMEZONE,
     };
   } catch {
     return Config;

@@ -23,6 +23,7 @@ const adminLinks:{name: string, href:string}[] = [
   {name: "Основное", href: "/admin"},
   {name: "Бронирование", href: "/admin/booking"},
   {name: "Турниры", href: "/admin/tournaments"},
+  {name: "События", href: "/admin/events"},
 ];
 
 export default function Nav({isColumn, isAdmin}: {isColumn?: boolean, isAdmin: boolean}) {

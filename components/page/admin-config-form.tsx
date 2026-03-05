@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
+import { TIMEZONE_OPTIONS, DEFAULT_TIMEZONE } from "@/lib/timezones";
 
 interface ConfigState {
   name: string;
@@ -21,6 +22,7 @@ interface ConfigState {
   description: string;
   emailSubject: string;
   emailHtml: string;
+  timezone: number;
 }
 
 const EMPTY: ConfigState = {
@@ -29,6 +31,7 @@ const EMPTY: ConfigState = {
   description: "",
   emailSubject: "",
   emailHtml: "",
+  timezone: DEFAULT_TIMEZONE,
 };
 
 export default function AdminConfigForm() {
@@ -55,6 +58,10 @@ export default function AdminConfigForm() {
   function set(field: keyof ConfigState) {
     return (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
       setValues((prev) => ({ ...prev, [field]: e.target.value }));
+  }
+
+  function setTimezone(e: React.ChangeEvent<HTMLSelectElement>) {
+    setValues(prev => ({ ...prev, timezone: Number(e.target.value) }));
   }
 
   async function submit() {
@@ -91,6 +98,18 @@ export default function AdminConfigForm() {
             rows={4}
             placeholder="Расширенное описание"
           />
+        </Field>
+        <Field>
+          <FieldLabel>Часовой пояс</FieldLabel>
+          <select
+            value={values.timezone}
+            onChange={setTimezone}
+            className="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-xs"
+          >
+            {TIMEZONE_OPTIONS.map(opt => (
+              <option key={opt.value} value={opt.value}>{opt.label}</option>
+            ))}
+          </select>
         </Field>
       </FieldGroup>
 

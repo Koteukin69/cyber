@@ -23,11 +23,17 @@ export const schemas = {
   team: z.object({
     name: z.string().trim().min(1, "Название обязательно").max(50, "Максимум 50 символов"),
   }),
+  event: z.object({
+    title: z.string().trim().min(1, "Название обязательно").max(100, "Максимум 100 символов"),
+    description: z.string().trim().max(2000, "Максимум 2000 символов").optional(),
+    date: z.string().min(1, "Укажите дату"),
+  }),
   siteConfig: z.object({
     name: z.string().trim().min(1, "Название обязательно"),
     briefDescription: z.string().trim().min(1, "Краткое описание обязательно"),
     description: z.string().trim().min(1, "Описание обязательно"),
     emailSubject: z.string().trim().min(1, "Тема письма обязательна"),
     emailHtml: z.string().trim().min(1, "HTML письма обязателен"),
+    timezone: z.number().int().min(-12).max(12),
   })
 }
