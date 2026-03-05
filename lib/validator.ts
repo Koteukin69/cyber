@@ -52,4 +52,14 @@ export const schemas = {
     startTime:  z.string().datetime(),
     slotCount:  z.number().int().min(1),
   }),
+  tournament: z.object({
+    title: z.string().trim().min(1, "Название обязательно").max(100, "Максимум 100 символов"),
+    description: z.string().trim().max(2000, "Максимум 2000 символов").optional(),
+    date: z.string().min(1, "Укажите дату"),
+    minTeamSize: z.number().int().min(1, "Минимум 1 участник"),
+    maxTeamSize: z.number().int().min(1, "Максимум хотя бы 1 участник"),
+  }).refine(d => d.maxTeamSize >= d.minTeamSize, {
+    message: "Максимальный размер не может быть меньше минимального",
+    path: ["maxTeamSize"],
+  }),
 }

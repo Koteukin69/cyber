@@ -21,7 +21,7 @@ export async function proxy(request: NextRequest) {
   }
 
   const secured = [
-    ["/profile", "/advancements", "/team"],
+    ["/profile", "/advancements", "/team", "/booking"],
     ["/admin", "/api/admin"],
   ]
 
@@ -35,6 +35,7 @@ export async function proxy(request: NextRequest) {
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set('x-user-id', payload.userId);
   requestHeaders.set('x-user-role', payload.role);
+  requestHeaders.set('x-user-email', payload.email);
 
   return NextResponse.next({
     request: { headers: requestHeaders },

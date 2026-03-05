@@ -38,7 +38,7 @@ export default function Nav({isColumn, isAdmin}: {isColumn?: boolean, isAdmin: b
       {isAdmin ? (
         <NavigationMenuItem>
           <NavigationMenuTrigger>Admin</NavigationMenuTrigger>
-          <NavigationMenuContent>
+          <NavigationMenuContent className={"z-1"}>
             <ul className={"flex flex-col gap-1"}>{adminLinks.map((link, i) => (
               <li key={i}>
                 <NavigationMenuLink asChild>

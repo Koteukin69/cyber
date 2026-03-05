@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { ObjectId } from 'mongodb';
 import { collections } from '@/lib/db/collections';
+import { syncTeamTournamentEligibility } from '@/lib/tournaments';
 
 type Params = { params: Promise<{ id: string }> };
 
@@ -40,6 +41,7 @@ export async function POST(req: NextRequest, { params }: Params) {
         $push: { members: { userId: applicantObjectId, joinedAt: new Date() } },
       }
     );
+    await syncTeamTournamentEligibility(new ObjectId(id), team.members.length + 1);
   } else {
     await teamsCol.updateOne(
       { _id: new ObjectId(id) },

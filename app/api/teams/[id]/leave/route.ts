@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { ObjectId } from 'mongodb';
 import { collections } from '@/lib/db/collections';
+import { removeTeamAllRegistrations, syncTeamTournamentEligibility } from '@/lib/tournaments';
 
 type Params = { params: Promise<{ id: string }> };
 
@@ -24,7 +25,10 @@ export async function POST(req: NextRequest, { params }: Params) {
   const remainingMembers = team.members.filter(m => !m.userId.equals(userObjectId));
 
   if (remainingMembers.length === 0) {
-    await teamsCol.deleteOne({ _id: new ObjectId(id) });
+    await Promise.all([
+      teamsCol.deleteOne({ _id: new ObjectId(id) }),
+      removeTeamAllRegistrations(new ObjectId(id)),
+    ]);
     return NextResponse.json({ deleted: true }, { status: 200 });
   }
 
@@ -32,6 +36,7 @@ export async function POST(req: NextRequest, { params }: Params) {
     { _id: new ObjectId(id) },
     { $pull: { members: { userId: userObjectId } } }
   );
+  await syncTeamTournamentEligibility(new ObjectId(id), remainingMembers.length);
 
   return NextResponse.json({}, { status: 200 });
 }

@@ -25,6 +25,7 @@ export interface JWTPayload {
   userId: string,
   email: string;
   role: Role;
+  group?: Group;
 }
 
 export interface SiteConfig {
@@ -75,4 +76,19 @@ export interface Team {
   name: string;
   members: TeamMember[];    // sorted by joinedAt ASC — members[0] is captain
   applications: ObjectId[]; // pending applicant user IDs
+}
+
+export interface TournamentRegistration {
+  teamId: ObjectId;
+  registeredAt: Date;
+}
+
+export interface Tournament {
+  _id: ObjectId;
+  title: string;
+  description?: string;
+  date: Date;
+  minTeamSize: number;
+  maxTeamSize: number;
+  registrations: TournamentRegistration[];
 }

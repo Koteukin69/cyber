@@ -1,4 +1,5 @@
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 import { ObjectId } from "mongodb";
 import { collections } from "@/lib/db/collections";
 import { getConfig } from "@/lib/config";
@@ -26,6 +27,8 @@ export default async function BookingPage() {
       : null;
 
   const hasProfile = !!(user?.fio && user?.group);
+
+  if (!hasProfile) redirect('/login');
 
   const doc = await layoutCol.findOne({});
   const layout: LayoutConfig = doc
