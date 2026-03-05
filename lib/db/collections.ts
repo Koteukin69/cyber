@@ -1,6 +1,6 @@
 import { Collection, Document } from 'mongodb';
 import clientPromise from './mongodb';
-import type { EmailCode, User, SiteConfig } from '@/lib/types';
+import type { EmailCode, User, SiteConfig, Team } from '@/lib/types';
 
 const DB_NAME = process.env.MONGODB_NAME || 'db';
 
@@ -18,4 +18,5 @@ export const collections = {
   emailCodes: () => { return getCollection<EmailCode>("emailCodes") },
   users: () => { return getCollection<User>("users") },
   siteConfig: () => { return getCollection<SiteConfig>("siteConfig") },
+  teams: () => { return getCollection<Team>("teams") },
 }

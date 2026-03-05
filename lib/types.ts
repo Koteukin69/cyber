@@ -34,3 +34,15 @@ export interface SiteConfig {
   emailSubject: string;
   emailHtml: string;
 }
+
+export interface TeamMember {
+  userId: ObjectId;
+  joinedAt: Date;
+}
+
+export interface Team {
+  _id: ObjectId;
+  name: string;
+  members: TeamMember[];    // sorted by joinedAt ASC — members[0] is captain
+  applications: ObjectId[]; // pending applicant user IDs
+}

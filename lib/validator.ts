@@ -20,6 +20,9 @@ export const schemas = {
     }, { message: "Невалидная группа" }),
     steam: z.string().trim().regex(/https?:\/\/steamcommunity\.com\/(id|profiles)\/([a-zA-Z0-9_-]+)\/?/, {message: "Должна быть ссылка на профиль steam"}).or(z.literal(""))
   }),
+  team: z.object({
+    name: z.string().trim().min(1, "Название обязательно").max(50, "Максимум 50 символов"),
+  }),
   siteConfig: z.object({
     name: z.string().trim().min(1, "Название обязательно"),
     briefDescription: z.string().trim().min(1, "Краткое описание обязательно"),
