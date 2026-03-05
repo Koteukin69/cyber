@@ -18,6 +18,9 @@ export async function GET(req: NextRequest) {
     emailSubject: doc?.emailSubject ?? DEFAULT_CONFIG_STRINGS.emailSubject,
     emailHtml: doc?.emailHtml ?? DEFAULT_CONFIG_STRINGS.emailHtml,
     timezone: doc?.timezone ?? DEFAULT_TIMEZONE,
+    workStart: doc?.workStart ?? 9,
+    slotDuration: doc?.slotDuration ?? 60,
+    slotCount: doc?.slotCount ?? 9,
   });
 }
 

@@ -35,5 +35,21 @@ export const schemas = {
     emailSubject: z.string().trim().min(1, "Тема письма обязательна"),
     emailHtml: z.string().trim().min(1, "HTML письма обязателен"),
     timezone: z.number().int().min(-12).max(12),
-  })
+    workStart: z.number().int().min(0).max(23),
+    slotDuration: z.number().int().min(1).max(120),
+    slotCount: z.number().int().min(1).max(24),
+  }),
+  layout: z.object({
+    width:  z.number().min(1).max(200),
+    height: z.number().min(1).max(200),
+    computers: z.array(z.object({
+      start: z.tuple([z.number().min(0), z.number().min(0)]),
+      size:  z.tuple([z.number().min(0.1), z.number().min(0.1)]),
+    })),
+  }),
+  booking: z.object({
+    computerId: z.number().int().min(0),
+    startTime:  z.string().datetime(),
+    slotCount:  z.number().int().min(1),
+  }),
 }

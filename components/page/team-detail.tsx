@@ -207,7 +207,6 @@ export default function TeamDetail({ teamId, userId, hasFio }: { teamId: string;
 
       <FieldSeparator />
 
-      {/* Members */}
       <FieldGroup>
         <div className="flex items-center justify-between">
           <span className="text-sm font-medium">
@@ -231,7 +230,6 @@ export default function TeamDetail({ teamId, userId, hasFio }: { teamId: string;
         </div>
       </FieldGroup>
 
-      {/* Actions for non-members */}
       {!team.isMember && userId && (
         <FieldGroup>
           <FieldSeparator />
@@ -253,7 +251,6 @@ export default function TeamDetail({ teamId, userId, hasFio }: { teamId: string;
         </FieldGroup>
       )}
 
-      {/* Leave for members */}
       {team.isMember && !team.isCaptain && (
         <FieldGroup>
           <FieldSeparator />
@@ -266,7 +263,6 @@ export default function TeamDetail({ teamId, userId, hasFio }: { teamId: string;
         </FieldGroup>
       )}
 
-      {/* Captain leave */}
       {team.isCaptain && (
         <FieldGroup>
           <FieldSeparator />
@@ -279,7 +275,6 @@ export default function TeamDetail({ teamId, userId, hasFio }: { teamId: string;
         </FieldGroup>
       )}
 
-      {/* Applications (captain only) */}
       {team.isCaptain && team.applications && team.applications.length > 0 && (
         <FieldGroup>
           <FieldSeparator />

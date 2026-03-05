@@ -16,7 +16,6 @@ const links: {name:string, href:string}[] = [
   {name:"Достижения", href:"/advancements"},
   {name:"Команды", href:"/team"},
   {name:"События", href:"/events"},
-  {name:"API", href:"/public_api"},
 ];
 
 const adminLinks:{name: string, href:string}[] = [

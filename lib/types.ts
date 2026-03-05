@@ -34,6 +34,28 @@ export interface SiteConfig {
   emailSubject: string;
   emailHtml: string;
   timezone: number;
+  workStart: number;
+  slotDuration: number;
+  slotCount: number;
+}
+
+export interface ComputerSlot {
+  start: [number, number];
+  size:  [number, number];
+}
+
+export interface LayoutConfig {
+  width:     number;
+  height:    number;
+  computers: ComputerSlot[];
+}
+
+export interface Booking {
+  _id:        ObjectId;
+  userId:     ObjectId;
+  computerId: number;
+  startTime:  Date;
+  endTime:    Date;
 }
 
 export interface Event {

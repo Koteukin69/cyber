@@ -23,6 +23,9 @@ interface ConfigState {
   emailSubject: string;
   emailHtml: string;
   timezone: number;
+  workStart: number;
+  slotDuration: number;
+  slotCount: number;
 }
 
 const EMPTY: ConfigState = {
@@ -32,6 +35,9 @@ const EMPTY: ConfigState = {
   emailSubject: "",
   emailHtml: "",
   timezone: DEFAULT_TIMEZONE,
+  workStart: 9,
+  slotDuration: 60,
+  slotCount: 9,
 };
 
 export default function AdminConfigForm() {
@@ -62,6 +68,11 @@ export default function AdminConfigForm() {
 
   function setTimezone(e: React.ChangeEvent<HTMLSelectElement>) {
     setValues(prev => ({ ...prev, timezone: Number(e.target.value) }));
+  }
+
+  function setNumber(field: keyof ConfigState) {
+    return (e: React.ChangeEvent<HTMLInputElement>) =>
+      setValues(prev => ({ ...prev, [field]: Number(e.target.value) }));
   }
 
   async function submit() {
@@ -110,6 +121,25 @@ export default function AdminConfigForm() {
               <option key={opt.value} value={opt.value}>{opt.label}</option>
             ))}
           </select>
+        </Field>
+      </FieldGroup>
+
+      <FieldSeparator />
+
+      <FieldGroup>
+        <FieldLegend variant="label">Часы работы</FieldLegend>
+        <Field>
+          <FieldLabel>Начало (час)</FieldLabel>
+          <FieldDescription>0–23, например 9 = 09:00</FieldDescription>
+          <Input type="number" min={0} max={23} value={values.workStart} onChange={setNumber("workStart")} />
+        </Field>
+        <Field>
+          <FieldLabel>Длительность слота (мин)</FieldLabel>
+          <Input type="number" min={1} max={120} value={values.slotDuration} onChange={setNumber("slotDuration")} />
+        </Field>
+        <Field>
+          <FieldLabel>Количество слотов</FieldLabel>
+          <Input type="number" min={1} max={24} value={values.slotCount} onChange={setNumber("slotCount")} />
         </Field>
       </FieldGroup>
 

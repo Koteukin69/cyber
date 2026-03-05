@@ -9,6 +9,9 @@ interface IConfig {
   emailSubject: TemplateExecutor,
   emailHtml: TemplateExecutor,
   timezone: number,
+  workStart: number,
+  slotDuration: number,
+  slotCount: number,
 };
 
 export const DEFAULT_CONFIG_STRINGS = {
@@ -43,6 +46,9 @@ const Config: IConfig = {
   emailSubject: template(DEFAULT_CONFIG_STRINGS.emailSubject),
   emailHtml: template(DEFAULT_CONFIG_STRINGS.emailHtml),
   timezone: DEFAULT_TIMEZONE,
+  workStart: 9,
+  slotDuration: 60,
+  slotCount: 9,
 };
 
 export async function getConfig(): Promise<IConfig> {
@@ -57,6 +63,9 @@ export async function getConfig(): Promise<IConfig> {
       emailSubject: template(doc.emailSubject),
       emailHtml: template(doc.emailHtml),
       timezone: doc.timezone ?? DEFAULT_TIMEZONE,
+      workStart: doc.workStart ?? 9,
+      slotDuration: doc.slotDuration ?? 60,
+      slotCount: doc.slotCount ?? 9,
     };
   } catch {
     return Config;

@@ -27,24 +27,22 @@ interface EventItem {
   _id: string;
   title: string;
   description: string | null;
-  date: string; // ISO UTC string
+  date: string;
 }
 
 interface FormState {
   title: string;
   description: string;
-  date: string; // datetime-local value (local time in configured tz)
+  date: string;
 }
 
 const EMPTY_FORM: FormState = { title: "", description: "", date: "" };
 
-// UTC ISO string → datetime-local string in configured timezone
 function toLocalInput(isoDate: string, offset: number): string {
   const utcMs = new Date(isoDate).getTime();
   return new Date(utcMs + offset * 3_600_000).toISOString().slice(0, 16);
 }
 
-// datetime-local string (local time) → UTC ISO string
 function toUTC(local: string, offset: number): string {
   const localMs = new Date(local + ":00.000Z").getTime();
   return new Date(localMs - offset * 3_600_000).toISOString();
@@ -55,7 +53,7 @@ export default function AdminEventsForm({ timezoneOffset }: { timezoneOffset: nu
   const [loading, setLoading] = useState(true);
 
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [editing, setEditing] = useState<string | null>(null); // null = create mode
+  const [editing, setEditing] = useState<string | null>(null);
   const [form, setForm] = useState<FormState>(EMPTY_FORM);
   const [formError, setFormError] = useState("");
   const [saving, setSaving] = useState(false);
@@ -187,7 +185,6 @@ export default function AdminEventsForm({ timezoneOffset }: { timezoneOffset: nu
         )}
       </div>
 
-      {/* Create / Edit dialog */}
       <Dialog open={dialogOpen} onOpenChange={open => { if (!open) setDialogOpen(false); }}>
         <DialogContent>
           <DialogHeader>
@@ -231,7 +228,6 @@ export default function AdminEventsForm({ timezoneOffset }: { timezoneOffset: nu
         </DialogContent>
       </Dialog>
 
-      {/* Delete confirmation dialog */}
       <Dialog open={!!deleteId} onOpenChange={open => { if (!open) setDeleteId(null); }}>
         <DialogContent>
           <DialogHeader>
