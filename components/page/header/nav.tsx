@@ -13,7 +13,6 @@ import {
 const links: {name:string, href:string}[] = [
   {name:"Бронирование", href:"/booking"},
   {name:"Турниры", href:"/tournaments"},
-  {name:"Достижения", href:"/advancements"},
   {name:"Команды", href:"/team"},
   {name:"События", href:"/events"},
 ];

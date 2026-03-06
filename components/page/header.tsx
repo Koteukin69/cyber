@@ -49,7 +49,7 @@ export default async function Header() {
 function Logo() {
   return (
     <Link href={"/"}>
-      <Image src={"logo.svg"} width={100} height={100} alt={"Logo"} className={"w-10 aspect-square"} />
+      <Image src={"/logo.svg"} width={100} height={100} alt={"Logo"} className={"w-10 aspect-square"} />
     </Link>
   );
 }
